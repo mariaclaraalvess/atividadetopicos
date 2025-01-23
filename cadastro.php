@@ -19,6 +19,18 @@ function limparEntrada($dados) {
   return $dados;
 }
 
+// Função para validar o formato de e-mail
+function validarEmail($email) {
+  return filter_var($email, FILTER_VALIDATE_EMAIL);
+}
+
+// Função para validar a senha
+function validarSenha($senha) {
+  // A senha precisa ter pelo menos 8 caracteres, uma letra maiúscula, uma letra minúscula, um número e um caractere especial
+  $padrao = "/^(?=.*[A-Za-z])(?=.*\d)(?=.*[!$%^&*?])[A-Za-z\d!$%^&*?]{8,}$/";
+  return preg_match($padrao, $senha);
+}
+
 // Verificar se o formulário foi enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $nome = limparEntrada($_POST['nome']);
@@ -27,9 +39,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $confirma_senha = limparEntrada($_POST['confirma_senha']);
   $termos = isset($_POST['termos']) ? true : false;
 
+  // Validar se os termos foram aceitos
+  if (!$termos) {
+    echo "Você precisa aceitar os termos e condições.";
+    exit();
+  }
+
+  // Validar o e-mail
+  if (!validarEmail($email)) {
+    echo "Por favor, insira um e-mail válido.";
+    exit();
+  }
+
   // Validar se as senhas coincidem
   if ($senha !== $confirma_senha) {
     echo "As senhas não coincidem!";
+    exit();
+  }
+
+  // Validar a senha
+  if (!validarSenha($senha)) {
+    echo "A senha deve ter pelo menos 8 caracteres, uma letra maiúscula, uma letra minúscula, um número e um caractere especial.";
     exit();
   }
 

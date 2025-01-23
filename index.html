@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página de Cadastro | Atividade de Tópicos SI</title>
+  <link rel="stylesheet" href="styles.css"> <!-- CSS separado -->
+</head>
+<body>
+  <div class="wrapper">
+    <h2>Cadastro</h2>
+    <form action="cadastro.php" method="POST"> <!-- Formulário POST para o backend -->
+      <div class="input-box">
+        <input type="text" name="nome" placeholder="Seu Nome" required>
+      </div>
+      <div class="input-box">
+        <input type="email" name="email" placeholder="Endereço E-mail" required>
+      </div>
+      <div class="input-box">
+        <input type="password" name="senha" placeholder="Crie uma Senha" required>
+      </div>
+      <div class="input-box">
+        <input type="password" name="confirma_senha" placeholder="Confirme a senha" required>
+      </div>
+      <div class="policy">
+        <input type="checkbox" name="termos" required>
+        <h3>Eu aceito todos os termos de condição.</h3>
+      </div>
+      <div class="input-box button">
+        <input type="submit" value="Cadastrar">
+      </div>
+    </form>
+  </div>
+</body>
+</html>
